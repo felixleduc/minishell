@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 21:21:43 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/14 21:28:03 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/15 12:05:05 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,17 @@ void    rm_quotes(t_vars *vars, char *quotes)
     free(vars->piped[vars->parse.nb_arg]);
     vars->piped[vars->parse.nb_arg] = ft_strdup(tmp);
     free(tmp);
+}
+
+void    free_doublearr(char **arr)
+{
+    int i;
+
+    i = -1;
+    if (arr)
+    {
+        while (arr[++i])
+            free(arr[i]);
+        free(arr);
+    }
 }

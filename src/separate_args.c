@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 09:35:48 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/14 21:36:25 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/15 11:40:34 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,12 @@ void    quotes(t_vars *vars, int *i, char quote)
         }
     }
     printf("unclosed quotes\n");
-    exit(1);
 }
 
 void    pipes_redirs(t_vars *vars, int *i, int start)
 {
-    if (vars->cmd[*i + 1] && (vars->cmd[*i] == '<' || vars->cmd[*i] == '>')
-            && (vars->cmd[*i + 1] == '<' || vars->cmd[*i + 1] == '>'))
+    if (vars->cmd[*i + 1] && ((vars->cmd[*i] == '<' && vars->cmd[*i + 1] == '<')
+            || (vars->cmd[*i] == '>' && vars->cmd[*i + 1] == '>')))
     {
         allocate(vars, start, *i + 1);
         ++(*i);

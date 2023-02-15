@@ -3,13 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 14:56:08 by fleduc            #+#    #+#             */
-/*   Updated: 2022/05/02 14:56:58 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/15 10:57:19 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-long	ft_atoi(const char *str)
+
+#include "libft.h"
+
+long	ft_atol(const char *str)
 {
 	int		i;
 	long	sign;

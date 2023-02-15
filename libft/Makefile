@@ -3,12 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+         #
+#    By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 09:41:33 by fleduc            #+#    #+#              #
-#    Updated: 2022/06/07 15:59:08 by fleduc           ###   ########.fr        #
+#    Updated: 2023/02/15 10:55:15 by fleduc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 NAME = libft.a
 
 CC = gcc

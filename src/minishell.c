@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2023/02/14 09:44:19 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/15 11:44:32 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	main(int argc, char **argv, char **envp)
 	if (argc == 1)
 	{
 		int	i = -1;
-		while (++i < 1)
+		++i;
+		while (1)
 		{
 			//signal_handling();
 			vars.env = envp;

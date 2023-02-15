@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:58:41 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/14 21:33:56 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/15 12:05:02 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ typedef struct s_vars
 	char			*cmd;
 	char			**env;
 	char			**piped;
+	char			**args;
+	char			*path;
+	int				nb_piped;
+	int				nb_pipes;
 	t_parse			parse;
 }	t_vars;
 
@@ -74,5 +78,11 @@ void    delete_var(t_vars *vars, int start, int end);
 
 //utils.c
 void	rm_quotes(t_vars *vars, char *quotes);
+void    free_doublearr(char **arr);
+
+//pipes.c
+void    do_pipes(t_vars *vars);
+void    sep_pipes(t_vars *vars);
+void    get_pipes(t_vars *vars);
 
 #endif

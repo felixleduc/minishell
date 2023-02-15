@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:33:34 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/14 14:49:17 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/15 11:41:07 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void    init_parse_struct(t_vars *vars)
 {
     vars->piped = NULL;
     vars->parse.word = 0;
+    vars->nb_piped = -1;
+    vars->nb_pipes = 0;
 }
 
 void    parse(t_vars *vars)
@@ -52,7 +54,8 @@ void    parse(t_vars *vars)
     init_parse_struct(vars);
     separate_args(vars);
     variables(vars);
-    int i = -1;
-    while (vars->piped[++i])
-        printf("%d: %s\n", i, vars->piped[i]);
+    do_pipes(vars);
+    // int i = -1;
+    // while (vars->piped[++i])
+    //     printf("%d: %s\n", i, vars->piped[i]);
 }
