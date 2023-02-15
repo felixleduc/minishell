@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:58:41 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/14 14:26:21 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/14 21:33:56 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,12 @@ void    to_piped(t_vars *vars, char **tmp);
 
 //variables.c
 void	variables(t_vars *vars);
+void    get_var(t_vars *vars, int index);
+void    find_var(t_vars *vars, int start, int end);
+void    change_var(t_vars *vars, int env_line, int start, int end);
+void    delete_var(t_vars *vars, int start, int end);
+
+//utils.c
+void	rm_quotes(t_vars *vars, char *quotes);
 
 #endif

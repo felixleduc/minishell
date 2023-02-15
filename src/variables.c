@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:31:42 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/14 14:54:13 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/14 21:57:17 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void    change_var(t_vars *vars, int env_line, int start, int end)
     while (vars->env[env_line][i] != '=')
         ++i;
     ++i;
-    tmp1 = ft_substr(vars->env[env_line], i, ft_strlen(vars->env[env_line]) - i);
-    tmp2 = ft_substr(vars->piped[vars->parse.nb_arg], 0, start);
+    tmp1 = ft_substr(vars->piped[vars->parse.nb_arg], 0, start);
+    tmp2 = ft_substr(vars->env[env_line], i, ft_strlen(vars->env[env_line]) - i);
     tmp3 = ft_strjoin(tmp1, tmp2);
     free(tmp1);
     free(tmp2);
@@ -54,7 +54,7 @@ void    find_var(t_vars *vars, int start, int end)
     char    *tmp;
     int     x;
 
-    tmp = ft_substr(vars->piped[vars->parse.nb_arg], start + 1, (end - start) + 1);
+    tmp = ft_substr(vars->piped[vars->parse.nb_arg], start + 1, end - start);
     var = ft_strjoin(tmp, "=");
     free(tmp);
     x = -1;
@@ -78,9 +78,6 @@ void    get_var(t_vars *vars, int index)
         && (vars->piped[vars->parse.nb_arg][index + 1] >= '0'
         && vars->piped[vars->parse.nb_arg][index + 1] <= '9'))
     {
-        while (vars->piped[vars->parse.nb_arg][index + 1] >= '0'
-            && vars->piped[vars->parse.nb_arg][index + 1] <= '9')
-            ++index;
         delete_var(vars, start, index);
         return ;
     }
@@ -101,15 +98,31 @@ void    variables(t_vars *vars)
     while (vars->piped[++vars->parse.nb_arg])
     {
         j = -1;
+        if (vars->piped[vars->parse.nb_arg][j + 1] == '\'')
+        {
+            rm_quotes(vars, "'");
+            continue ;
+        }
+        if (vars->piped[vars->parse.nb_arg][j + 1] == '"')
+            rm_quotes(vars, "\"");
         while (vars->piped[vars->parse.nb_arg][++j])
         {
-            if (vars->piped[vars->parse.nb_arg][j] == '$' && !vars->piped[vars->parse.nb_arg][j + 1])
+            if ((vars->piped[vars->parse.nb_arg][j] == '$' && !vars->piped[vars->parse.nb_arg][j + 1])
+                || (vars->piped[vars->parse.nb_arg][j] == '$' && vars->piped[vars->parse.nb_arg][j + 1]
+                && (vars->piped[vars->parse.nb_arg][j + 1] == 32 || (vars->piped[vars->parse.nb_arg][j] >= 9
+                && vars->piped[vars->parse.nb_arg][j] <= 13))))
                 break ;
             else if (vars->piped[vars->parse.nb_arg][j + 1] && vars->piped[vars->parse.nb_arg][j] == '$'
                 && vars->piped[vars->parse.nb_arg][j + 1] == '?')
+            {
                 get_var(vars, j);
+                j = -1;
+            }
             else if (vars->piped[vars->parse.nb_arg][j] == '$')
+            {
                 get_var(vars, j);
+                j = -1;
+            }
         }
     }
 }

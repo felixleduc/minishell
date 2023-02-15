@@ -6,7 +6,7 @@
 #    By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:50:59 by fleduc            #+#    #+#              #
-#    Updated: 2023/02/14 14:09:18 by fleduc           ###   ########.fr        #
+#    Updated: 2023/02/14 21:28:24 by fleduc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT = @$(MAKE) -sC ./libft
 LIBFTA = ./libft/libft.a
 
 HEADERS = include/minishell.h
-SRCS = src/minishell.c src/parse.c src/separate_args.c src/variables.c
+SRCS = src/minishell.c src/parse.c src/separate_args.c src/variables.c src/utils.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
