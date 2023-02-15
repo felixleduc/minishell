@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:58:41 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/15 12:05:02 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/15 14:52:03 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ void    free_doublearr(char **arr);
 //pipes.c
 void    do_pipes(t_vars *vars);
 void    sep_pipes(t_vars *vars);
-void    get_pipes(t_vars *vars);
+int		get_pipes(t_vars *vars);
 
 #endif

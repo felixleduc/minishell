@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:33:34 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/15 11:41:07 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/15 14:56:26 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void    parse(t_vars *vars)
     trim_cmd(vars);
     init_parse_struct(vars);
     separate_args(vars);
+    if (!vars->piped)
+        return ;
     variables(vars);
     do_pipes(vars);
     // int i = -1;
