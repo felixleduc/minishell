@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:58:41 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/15 14:52:03 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/16 08:52:44 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ typedef struct s_vars
 	char			*path;
 	int				nb_piped;
 	int				nb_pipes;
+	int				*pids;
+	int				status;
 	t_parse			parse;
 }	t_vars;
 
@@ -84,5 +86,8 @@ void    free_doublearr(char **arr);
 void    do_pipes(t_vars *vars);
 void    sep_pipes(t_vars *vars);
 int		get_pipes(t_vars *vars);
+void    find_path(t_vars *vars);
+void    do_exec(t_vars *vars, int nb);
+void    exec(t_vars *vars);
 
 #endif

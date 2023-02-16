@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:21:00 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/15 15:08:16 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/16 08:52:32 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,26 +88,34 @@ void    find_path(t_vars *vars)
     }
 }
 
-void    do_exec(t_vars *vars)
+void    do_exec(t_vars *vars, int nb)
 {
     int fd[2];
-    int pid;
 
     if (pipe(fd) == -1)
         return ;
-    pid = fork();
-    if (pid < 0)
+    vars->pids[nb] = fork();
+    if (vars->pids[nb] < 0)
     {
         perror("fork");
         exit(1);
     }
-    if (pid == 0)
+    if (vars->pids[nb] == 0)
     {
+        if (nb < vars->nb_pipes)
+        {
+            close(fd[0]);
+            dup2(fd[1], STDOUT_FILENO);
+        }
         execve(vars->path, vars->args, vars->env);
         perror(vars->args[0]);
         exit(1);
     }
-    waitpid(pid, 0, 0);
+    if (nb < vars->nb_pipes)
+    {
+        close(fd[1]);
+        dup2(fd[0], STDIN_FILENO);
+    }
 }
 
 void    do_pipes(t_vars *vars)
@@ -117,14 +125,32 @@ void    do_pipes(t_vars *vars)
     i = 0;
     if (get_pipes(vars))
         return ;
+    vars->pids = ft_calloc(vars->nb_pipes + 2, sizeof(int));
     while (i <= vars->nb_pipes)
     {
         sep_pipes(vars);
         find_path(vars);
-        do_exec(vars);
-
+        do_exec(vars, i);
         free(vars->path);
         free_doublearr(vars->args);
         ++i;
     }
+    i = 0;
+    while (i <= vars->nb_pipes)
+    {
+        waitpid(vars->pids[i], &vars->status, 0);
+        ++i;
+    }
+}
+
+void    exec(t_vars *vars)
+{
+    int save_in;
+    int save_out;
+
+    save_in = dup(STDIN_FILENO);
+    save_out = dup(STDOUT_FILENO);
+    do_pipes(vars);
+    dup2(save_in, STDIN_FILENO);
+    dup2(save_out, STDOUT_FILENO);
 }

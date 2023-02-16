@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2023/02/15 11:44:32 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/16 08:39:11 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	free_garbage(t_vars *vars)
 		}
 		free(vars->piped);
 	}
+	if (vars->pids)
+		free(vars->pids);
 	free(vars->cmd);
 }
 
