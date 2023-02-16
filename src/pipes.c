@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:21:00 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/16 08:52:32 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/16 10:35:10 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void    do_exec(t_vars *vars, int nb)
             close(fd[0]);
             dup2(fd[1], STDOUT_FILENO);
         }
+        if (redirections(vars))
+            exit(1);
         execve(vars->path, vars->args, vars->env);
         perror(vars->args[0]);
         exit(1);
@@ -116,6 +118,20 @@ void    do_exec(t_vars *vars, int nb)
         close(fd[1]);
         dup2(fd[0], STDIN_FILENO);
     }
+}
+
+void    do_exec_solo(t_vars *vars)
+{
+    if (redirections(vars))
+        return ;
+    vars->pids[0] = fork();
+    if (vars->pids[0] == 0)
+    {
+        execve(vars->path, vars->args, vars->env);
+        perror(vars->args[0]);
+        exit(1);
+    }
+    waitpid(vars->pids[0], &vars->status, 0);
 }
 
 void    do_pipes(t_vars *vars)
@@ -130,7 +146,10 @@ void    do_pipes(t_vars *vars)
     {
         sep_pipes(vars);
         find_path(vars);
-        do_exec(vars, i);
+        if (vars->nb_pipes == 0)
+            do_exec_solo(vars);
+        else
+            do_exec(vars, i);
         free(vars->path);
         free_doublearr(vars->args);
         ++i;
@@ -143,7 +162,7 @@ void    do_pipes(t_vars *vars)
     }
 }
 
-void    exec(t_vars *vars)
+void    dup_for_exec(t_vars *vars)
 {
     int save_in;
     int save_out;

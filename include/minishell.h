@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:58:41 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/16 08:52:44 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/16 10:03:32 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_vars
 	int				nb_pipes;
 	int				*pids;
 	int				status;
+	int				redir_fd[2];
 	t_parse			parse;
 }	t_vars;
 
@@ -88,6 +89,13 @@ void    sep_pipes(t_vars *vars);
 int		get_pipes(t_vars *vars);
 void    find_path(t_vars *vars);
 void    do_exec(t_vars *vars, int nb);
-void    exec(t_vars *vars);
+void    dup_for_exec(t_vars *vars);
+
+//redirections.c
+int		redirections(t_vars *vars);
+void    fd_redirs(t_vars *vars, int *redirs, int in_out);
+void    duplicate(t_vars *vars);
+void    remake_args(t_vars *vars);
+void    remake_args2(t_vars *vars, int i, int red);
 
 #endif

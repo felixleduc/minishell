@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:33:34 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/16 08:40:56 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/16 10:14:05 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,5 @@ void    parse(t_vars *vars)
     if (!vars->piped)
         return ;
     variables(vars);
-    exec(vars);
-    // int i = -1;
-    // while (vars->piped[++i])
-    //     printf("%d: %s\n", i, vars->piped[i]);
+    dup_for_exec(vars);
 }
