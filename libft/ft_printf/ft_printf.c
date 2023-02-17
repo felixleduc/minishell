@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 16:08:23 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/15 10:55:55 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/04/27 14:25:48 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_printf.h"
 #include<stdio.h>
 

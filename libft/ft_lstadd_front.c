@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 18:29:02 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/15 10:53:16 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/04/25 13:18:25 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 void	ft_lstadd_front(t_list **lst, t_list *new)

@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 21:21:43 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/16 08:38:37 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/17 11:02:49 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,19 @@ void    free_doublearr(char **arr)
             free(arr[i]);
         free(arr);
     }
+}
+
+char    **dup_doublearr(char **arr)
+{
+    char    **new;
+    int i;
+
+    i = 0;
+    while (arr[i])
+        ++i;
+    new = ft_calloc(i + 1, sizeof(char *));
+    i = -1;
+    while (arr[++i])
+        new[i] = ft_strdup(arr[i]);
+    return (new);
 }

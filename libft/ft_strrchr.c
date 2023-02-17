@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:04:55 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/14 14:16:50 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/04/04 13:08:30 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 char	*ft_strrchr(const char *s, int c)

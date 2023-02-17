@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:40:41 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/15 10:55:09 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/06/07 15:58:33 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 int	ft_sl(char *str)

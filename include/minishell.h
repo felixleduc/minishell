@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:58:41 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/16 10:03:32 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/17 11:03:00 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_vars
 	char			*path;
 	int				nb_piped;
 	int				nb_pipes;
-	int				*pids;
+	pid_t			*pids;
 	int				status;
 	int				redir_fd[2];
 	t_parse			parse;
@@ -82,6 +82,7 @@ void    delete_var(t_vars *vars, int start, int end);
 //utils.c
 void	rm_quotes(t_vars *vars, char *quotes);
 void    free_doublearr(char **arr);
+char    **dup_doublearr(char **arr);
 
 //pipes.c
 void    do_pipes(t_vars *vars);
@@ -97,5 +98,10 @@ void    fd_redirs(t_vars *vars, int *redirs, int in_out);
 void    duplicate(t_vars *vars);
 void    remake_args(t_vars *vars);
 void    remake_args2(t_vars *vars, int i, int red);
+
+//builtins.c
+int 	built_in(t_vars *vars);
+void    ft_unset(t_vars *vars);
+void    ft_env(t_vars *vars);
 
 #endif

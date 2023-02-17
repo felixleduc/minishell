@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:21:00 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/16 10:35:10 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/17 10:46:45 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,10 +141,16 @@ void    do_pipes(t_vars *vars)
     i = 0;
     if (get_pipes(vars))
         return ;
-    vars->pids = ft_calloc(vars->nb_pipes + 2, sizeof(int));
+    vars->pids = ft_calloc(vars->nb_pipes + 2, sizeof(pid_t));
     while (i <= vars->nb_pipes)
     {
         sep_pipes(vars);
+        if (built_in(vars))
+        {
+            free_doublearr(vars->args);
+            ++i;
+            continue ;
+        }
         find_path(vars);
         if (vars->nb_pipes == 0)
             do_exec_solo(vars);
@@ -154,12 +160,9 @@ void    do_pipes(t_vars *vars)
         free_doublearr(vars->args);
         ++i;
     }
-    i = 0;
-    while (i <= vars->nb_pipes)
-    {
+    i = -1;
+    while (++i <= vars->nb_pipes)
         waitpid(vars->pids[i], &vars->status, 0);
-        ++i;
-    }
 }
 
 void    dup_for_exec(t_vars *vars)

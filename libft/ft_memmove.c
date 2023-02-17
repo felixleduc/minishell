@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:49:20 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/15 10:53:57 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/04/04 12:15:59 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
