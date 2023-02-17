@@ -3,12 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 11:00:44 by fleduc            #+#    #+#             */
-/*   Updated: 2022/03/28 11:52:35 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/17 11:52:30 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
+
 int	ft_isalpha(int c)
 {
 	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))

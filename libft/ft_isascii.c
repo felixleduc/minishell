@@ -3,12 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 11:48:50 by fleduc            #+#    #+#             */
-/*   Updated: 2022/03/31 10:28:22 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/17 11:52:37 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
+
 int	ft_isascii(int c)
 {
 	if (c >= 0 && c <= 127)

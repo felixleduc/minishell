@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_format_x.c                                      :+:      :+:    :+:   */
+/*   ft_format_x_u.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:09:30 by fleduc            #+#    #+#             */
-/*   Updated: 2022/04/11 09:45:04 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/17 11:51:18 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	ft_hexa_convert(unsigned int nb, char *base, int *ret)

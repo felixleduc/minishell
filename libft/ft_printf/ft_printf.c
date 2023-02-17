@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 16:08:23 by fleduc            #+#    #+#             */
-/*   Updated: 2022/04/27 14:25:48 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/17 11:52:00 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "ft_printf.h"
-#include<stdio.h>
 
 int	ft_putchar(unsigned char c)
 {
@@ -51,7 +51,7 @@ static int	ft_get_format(const char *format, int index, va_list args)
 		ret = ft_format_x_u(format[index], va_arg(args, unsigned int));
 	else if (format[index] == '%')
 	{
-		write(1, "%", 1);
+		write(1, "%%", 1);
 		ret = 1;
 	}
 	return (ret);

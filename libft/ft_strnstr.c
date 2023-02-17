@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:56:10 by fleduc            #+#    #+#             */
-/*   Updated: 2022/04/01 19:29:35 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/17 11:54:32 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)

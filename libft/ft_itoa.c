@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:20:04 by fleduc            #+#    #+#             */
-/*   Updated: 2022/05/05 12:56:03 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/17 11:52:50 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 static int	nb_size(int n)

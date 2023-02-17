@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 12:45:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/04/05 13:56:34 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/17 11:53:05 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
