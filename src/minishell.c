@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2023/02/17 11:41:26 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/18 11:13:53 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc == 1)
 	{
 		vars.env = dup_doublearr(envp);
+		vars.status = 0;
 		while (1)
 		{
 			//signal_handling();

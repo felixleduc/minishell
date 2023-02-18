@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:33:34 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/17 11:35:33 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/18 11:11:24 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void    parse(t_vars *vars)
     if (!vars->piped)
         return ;
     variables(vars);
+    vars->status = 0;
     dup_for_exec(vars);
 }

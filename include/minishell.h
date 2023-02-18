@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:58:41 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/17 11:03:00 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/18 11:12:47 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,9 @@ void    remake_args2(t_vars *vars, int i, int red);
 int 	built_in(t_vars *vars);
 void    ft_unset(t_vars *vars);
 void    ft_env(t_vars *vars);
+void    ft_pwd(t_vars *vars);
+void    ft_cd(t_vars *vars);
+void    change_pwd(t_vars *vars, char *old, char *new);
+void    ft_exit(t_vars *vars);
 
 #endif

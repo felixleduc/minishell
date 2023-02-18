@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 10:50:10 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/17 11:42:49 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/18 11:37:15 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,125 @@
 
 int 	built_in(t_vars *vars)
 {
-    if (ft_strncmp("echo", vars->args[0], ft_strlen(vars->args[0])) == 0)
+    if (ft_strcmp("echo", vars->args[0]) == 0)
         return (1);
-    else if (ft_strncmp("cd", vars->args[0], ft_strlen(vars->args[0])) == 0)
+    else if (ft_strcmp("cd", vars->args[0]) == 0)
+    {
+        ft_cd(vars);
         return (1);
-    else if (ft_strncmp("pwd", vars->args[0], ft_strlen(vars->args[0])) == 0)
+    }
+    else if (ft_strcmp("pwd", vars->args[0]) == 0)
+    {
+        ft_pwd(vars);
         return (1);
-    else if (ft_strncmp("export", vars->args[0], ft_strlen(vars->args[0])) == 0)
+    }
+    else if (ft_strcmp("export", vars->args[0]) == 0)
         return (1);
-    else if (ft_strncmp("unset", vars->args[0], ft_strlen(vars->args[0])) == 0)
+    else if (ft_strcmp("unset", vars->args[0]) == 0)
     {
         ft_unset(vars);
         return (1);
     }
-    else if (ft_strncmp("env", vars->args[0], ft_strlen(vars->args[0])) == 0)
+    else if (ft_strcmp("env", vars->args[0]) == 0)
     {
         ft_env(vars);
         return (1);
     }
-    else if (ft_strncmp("exit", vars->args[0], ft_strlen(vars->args[0])) == 0)
+    else if (ft_strcmp("exit", vars->args[0]) == 0)
+    {
+        ft_exit(vars);
         return (1);
+    }
     return (0);
+}
+
+void    ft_exit(t_vars *vars)
+{
+    int     i;
+
+    i = -1;
+    printf("exit\n");
+    if (vars->args[1] && vars->args[2])
+    {
+        vars->status = 1;
+        printf("exit: too many arguments\n");
+        return ;
+    }
+    if (vars->args[1])
+    {
+        while (vars->args[1][++i])
+        {
+            if ((vars->args[1][i] < '0' || vars->args[1][i] > '9')
+                && vars->args[1][i] != '-')
+            {
+                printf("exit: %s: numeric argument required\n", vars->args[1]);
+                free_doublearr(vars->args);
+                exit(255);
+            }
+        }
+        free_doublearr(vars->args);
+        exit(ft_atol(vars->args[1]));
+    }
+    free_doublearr(vars->args);
+    exit(vars->status);
+}
+
+void    change_pwd(t_vars *vars, char *old, char *new)
+{
+    int i;
+
+    i = -1;
+    while (vars->env[++i])
+    {
+        if (ft_strncmp("OLDPWD", vars->env[i], 6) == 0)
+        {
+            free(vars->env[i]);
+            vars->env[i] = ft_strjoin("OLDPWD=", old);
+        }
+        else if (ft_strncmp("PWD", vars->env[i], 3) == 0)
+        {
+            free(vars->env[i]);
+            vars->env[i] = ft_strjoin("PWD=", new);
+        }
+    }
+}
+
+void    ft_cd(t_vars *vars)
+{
+    int ret;
+    char    *old;
+    char    *new;
+
+    if (!vars->args[1])
+        return ;
+    old = ft_calloc(1000, sizeof(char));
+    new = ft_calloc(1000, sizeof(char));
+    getcwd(old, 1000);
+    ret = chdir(vars->args[1]);
+    change_pwd(vars, old, getcwd(new, 1000));
+    free(old);
+    free(new);
+    if (ret != 0)
+    {
+        vars->status = errno;
+        printf("cd: %s: No such file or directory\n", vars->args[1]);
+    }
+}
+
+void    ft_pwd(t_vars *vars)
+{
+    char    *buffer;
+
+    buffer = ft_calloc(1000, sizeof(char));
+    getcwd(buffer, 1000);
+    if (buffer == NULL)
+    {
+        vars->status = errno;
+        perror("pwd");
+    }
+    else
+        printf("%s\n", buffer);
+    free(buffer);
 }
 
 void    ft_unset(t_vars *vars)
@@ -71,7 +169,10 @@ void    ft_env(t_vars *vars)
 
     i = -1;
     if (vars->args[1])
+    {
+        vars->status = 127;
         printf("env: %s: No such file or directory\n", vars->args[1]);
+    }
     else
         while (vars->env[++i])
             printf("%s\n", vars->env[i]);
