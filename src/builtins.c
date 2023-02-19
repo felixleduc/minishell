@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 10:50:10 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/18 11:37:15 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/19 12:53:35 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int 	built_in(t_vars *vars)
 {
     if (ft_strcmp("echo", vars->args[0]) == 0)
+    {
+        ft_echo(vars);
         return (1);
+    }
     else if (ft_strcmp("cd", vars->args[0]) == 0)
     {
         ft_cd(vars);
@@ -27,7 +30,10 @@ int 	built_in(t_vars *vars)
         return (1);
     }
     else if (ft_strcmp("export", vars->args[0]) == 0)
+    {
+        // ft_export(vars);
         return (1);
+    }
     else if (ft_strcmp("unset", vars->args[0]) == 0)
     {
         ft_unset(vars);
@@ -44,6 +50,83 @@ int 	built_in(t_vars *vars)
         return (1);
     }
     return (0);
+}
+
+// void    print_export(t_vars *vars)
+// {
+//     int     i;
+//     int     j;
+//     char    *tmp;
+
+//     i = -1;
+//     while (vars->export_env[++i])
+//     {
+//         j = -1;
+//         printf("declare -x ");
+//         while (vars->export_env[i][j]
+//             && vars->export_env[i][j] != '=')
+//             ++j;
+//         tmp = ft_substr(vars->export_env[i], 0, j);
+//         printf("%s=\"", tmp);
+//         free(tmp);
+//         tmp = ft_substr(vars->export_env[i], j + 1,
+//             ft_strlen(vars->export_env[i]) - j - 1);
+//         printf("%s\"", tmp);
+//         free(tmp);
+//     }
+// }
+
+// void    ft_export(t_vars *vars)
+// {
+//     int i;
+
+//     i = 0;
+//     while (vars->args[++i])
+//     {}
+//     print_export(vars);
+// }
+
+int parse_flag(t_vars *vars, int i)
+{
+    int j;
+
+    j = 0;
+    if (vars->args[i])
+    {
+        if (vars->args[i][0] != '-')
+            return (0);
+        while (vars->args[i][++j])
+            if (vars->args[i][j] != 'n')
+                return (0);
+    }
+    return (1);
+}
+
+void    ft_echo(t_vars *vars)
+{
+    int i;
+    int n;
+    int last;
+
+    i = 1;
+    n = parse_flag(vars, i);
+    last = n;
+    while (last && vars->args[++i])
+    {
+        if (last)
+            last = parse_flag(vars, i);
+        else
+            break ;
+    }
+    while (vars->args[i + 1])
+    {
+        printf("%s ", vars->args[i]);
+        ++i;
+    }
+    if (n)
+        printf("%s", vars->args[i]);
+    else
+        printf("%s\n", vars->args[i]);
 }
 
 void    ft_exit(t_vars *vars)
