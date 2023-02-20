@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 10:50:10 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/19 12:53:35 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/20 10:41:05 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int 	built_in(t_vars *vars)
     }
     else if (ft_strcmp("export", vars->args[0]) == 0)
     {
-        // ft_export(vars);
+        ft_export(vars);
         return (1);
     }
     else if (ft_strcmp("unset", vars->args[0]) == 0)
@@ -52,39 +52,142 @@ int 	built_in(t_vars *vars)
     return (0);
 }
 
-// void    print_export(t_vars *vars)
-// {
-//     int     i;
-//     int     j;
-//     char    *tmp;
+void    print_export(t_vars *vars)
+{
+    int     i;
+    int     j;
+    char    *tmp;
 
-//     i = -1;
-//     while (vars->export_env[++i])
-//     {
-//         j = -1;
-//         printf("declare -x ");
-//         while (vars->export_env[i][j]
-//             && vars->export_env[i][j] != '=')
-//             ++j;
-//         tmp = ft_substr(vars->export_env[i], 0, j);
-//         printf("%s=\"", tmp);
-//         free(tmp);
-//         tmp = ft_substr(vars->export_env[i], j + 1,
-//             ft_strlen(vars->export_env[i]) - j - 1);
-//         printf("%s\"", tmp);
-//         free(tmp);
-//     }
-// }
+    i = -1;
+    while (vars->export_env[++i])
+    {
+        j = 0;
+        printf("declare -x ");
+        while (vars->export_env[i][j]
+            && vars->export_env[i][j] != '=')
+            ++j;
+        tmp = ft_substr(vars->export_env[i], 0, j);
+        printf("%s", tmp);
+        free(tmp);
+        if (j != (int)ft_strlen(vars->export_env[i]))
+        {
+            tmp = ft_substr(vars->export_env[i], j + 1,
+                ft_strlen(vars->export_env[i]) - j - 1);
+            printf("=\"%s\"", tmp);
+            free(tmp);
+        }
+        printf("\n");
+    }
+}
 
-// void    ft_export(t_vars *vars)
-// {
-//     int i;
+int check_export(t_vars *vars, int i)
+{
+    int j;
 
-//     i = 0;
-//     while (vars->args[++i])
-//     {}
-//     print_export(vars);
-// }
+    j = 0;
+    if ((vars->args[i][j] < 'a' || vars->args[i][j] > 'z')
+        && (vars->args[i][j] < 'A' || vars->args[i][j] > 'Z')
+        && vars->args[i][j] != '_')
+        return (0);
+    ++j;
+    while (vars->args[i][j] && vars->args[i][j] != '=')
+    {
+        if ((vars->args[i][j] < 'a' || vars->args[i][j] > 'z')
+            && (vars->args[i][j] < 'A' || vars->args[i][j] > 'Z')
+            &&  (vars->args[i][j] < '0' || vars->args[i][j] > '9')
+            && vars->args[i][j] != '_')
+            return (0);
+        ++j;
+    }
+    return (1);
+}
+
+int check_if_exist(t_vars *vars, char **arr, int i)
+{
+    char    *tmp;
+    int     exist;
+    int     j;
+
+    exist = -1;
+    j = 0;
+    while (vars->args[i][j] && vars->args[i][j] != '=')
+        ++j;
+    if (j != (int)ft_strlen(vars->args[i]))
+    {
+        tmp = ft_substr(vars->args[i], 0, j);
+        j = -1;
+        while (arr[++j])
+            if (ft_strncmp(tmp, arr[j], ft_strlen(tmp)) == 0)
+                exist = j;
+    }
+    return (exist);
+}
+
+void    add_to_export_env(t_vars *vars, int env_i, int i)
+{
+    char    **tmp;
+    int     j;
+
+    j = 0;
+    while (vars->args[i][j] && vars->args[i][j] != '=')
+        ++j;
+    if (j != (int)ft_strlen(vars->args[i]) && env_i != -1)
+    {
+        free(vars->export_env[env_i]);
+        vars->export_env[env_i] = ft_strdup(vars->args[i]);
+    }
+    else
+    {
+        tmp = addback_doublearr(vars->export_env, vars->args[i]);
+        free_doublearr(vars->export_env);
+        vars->export_env = dup_doublearr(tmp);
+        free_doublearr(tmp);
+    }
+}
+
+void    add_to_env(t_vars *vars, int env_i, int i)
+{
+    char    **tmp;
+    int     j;
+
+    j = 0;
+    while (vars->args[i][j] && vars->args[i][j] != '=')
+        ++j;
+    if (j != (int)ft_strlen(vars->args[i]))
+    {
+        if (env_i != -1)
+        {
+            free(vars->env[env_i]);
+            vars->env[env_i] = ft_strdup(vars->args[i]);
+        }
+        else
+        {
+            tmp = addback_doublearr(vars->env, vars->args[i]);
+            free_doublearr(vars->env);
+            vars->env = dup_doublearr(tmp);
+            free_doublearr(tmp);
+        }
+    }
+}
+
+void    ft_export(t_vars *vars)
+{
+    int     i;
+
+    i = 0;
+    while (vars->args[++i])
+    {
+        if (check_export(vars, i))
+        {
+            add_to_env(vars, check_if_exist(vars, vars->env, i), i);
+            add_to_export_env(vars, check_if_exist(vars, vars->export_env, i), i);
+        }
+        else
+            printf("export: %s: not a valid identifier\n", vars->args[i]);
+    }
+    if (!vars->args[1])
+        print_export(vars);
+}
 
 int parse_flag(t_vars *vars, int i)
 {
@@ -153,7 +256,6 @@ void    ft_exit(t_vars *vars)
                 exit(255);
             }
         }
-        free_doublearr(vars->args);
         exit(ft_atol(vars->args[1]));
     }
     free_doublearr(vars->args);

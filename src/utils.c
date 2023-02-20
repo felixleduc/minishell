@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 21:21:43 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/17 11:02:49 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/20 09:54:52 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ void    free_doublearr(char **arr)
 {
     int i;
 
-    i = -1;
+    i = 0;
     if (arr)
     {
-        while (arr[++i])
+        while (arr[i])
+        {
             free(arr[i]);
+            ++i;
+        }
         free(arr);
     }
 }
@@ -47,5 +50,21 @@ char    **dup_doublearr(char **arr)
     i = -1;
     while (arr[++i])
         new[i] = ft_strdup(arr[i]);
+    return (new);
+}
+
+char    **addback_doublearr(char **arr, char *value)
+{
+    char    **new;
+    int     i;
+    
+    i = 0;
+    while (arr[i])
+        ++i;
+    new = ft_calloc(i + 2, sizeof(char *));
+    i = -1;
+    while (arr[++i])
+        new[i] = ft_strdup(arr[i]);
+    new[i] = ft_strdup(value);
     return (new);
 }

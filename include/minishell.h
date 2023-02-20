@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:58:41 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/19 12:52:53 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/20 10:39:28 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_vars
 {
 	char			*cmd;
 	char			**env;
+	char			**export_env;
 	char			**piped;
 	char			**args;
 	char			*path;
@@ -83,6 +84,7 @@ void    delete_var(t_vars *vars, int start, int end);
 void	rm_quotes(t_vars *vars, char *quotes);
 void    free_doublearr(char **arr);
 char    **dup_doublearr(char **arr);
+char    **addback_doublearr(char **arr, char *value);
 
 //pipes.c
 void    do_pipes(t_vars *vars);
@@ -111,5 +113,9 @@ void    ft_echo(t_vars *vars);
 int 	parse_flag(t_vars *vars, int i);
 void    ft_export(t_vars *vars);
 void    print_export(t_vars *vars);
+int		check_export(t_vars *vars, int i);
+void    add_to_env(t_vars *vars, int env_i, int i);
+void    add_to_export_env(t_vars *vars, int env_i, int i);
+int 	check_if_exist(t_vars *vars, char **arr, int i);
 
 #endif

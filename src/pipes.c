@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:21:00 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/19 12:52:41 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/20 09:14:27 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void    sep_pipes(t_vars *vars)
     vars->args = ft_calloc(i + 1, sizeof(char *));
     while (++j < i)
         vars->args[j] = ft_strdup(vars->piped[j + start]);
+    i = -1;
 }
 
 void    find_path(t_vars *vars)
@@ -81,6 +82,7 @@ void    find_path(t_vars *vars)
                     return ;
                 }
                 free(vars->path);
+                vars->path = NULL;
             }
             free_doublearr(sep_path);
             return ;
@@ -156,7 +158,8 @@ void    do_pipes(t_vars *vars)
             do_exec_solo(vars);
         else
             do_exec(vars, i);
-        free(vars->path);
+        if (vars->path != NULL)
+            free(vars->path);
         free_doublearr(vars->args);
         ++i;
     }
