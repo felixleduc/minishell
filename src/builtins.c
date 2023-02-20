@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 10:50:10 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/20 10:41:05 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/20 10:48:17 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int 	built_in(t_vars *vars)
 {
+    if (redirections(vars))
+        return (-1);
     if (ft_strcmp("echo", vars->args[0]) == 0)
     {
         ft_echo(vars);
