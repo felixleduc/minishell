@@ -6,7 +6,7 @@
 #    By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:50:59 by fleduc            #+#    #+#              #
-#    Updated: 2023/02/17 11:15:39 by fleduc           ###   ########.fr        #
+#    Updated: 2023/02/20 13:31:42 by fleduc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBFTA = ./libft/libft.a
 
 SRCS = src/minishell.c src/parse.c src/separate_args.c \
 	   src/variables.c src/utils.c src/pipes.c src/redirections.c \
-	   src/builtins.c
+	   src/builtins.c src/builtins2.c src/export.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

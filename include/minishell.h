@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:58:41 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/20 10:39:28 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/20 13:29:35 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,18 +104,26 @@ void    remake_args2(t_vars *vars, int i, int red);
 //builtins.c
 int 	built_in(t_vars *vars);
 void    ft_unset(t_vars *vars);
-void    ft_env(t_vars *vars);
 void    ft_pwd(t_vars *vars);
+void    ft_exit(t_vars *vars);
+void    ft_export(t_vars *vars);
+
+//builtins2.c
+void    ft_env(t_vars *vars);
 void    ft_cd(t_vars *vars);
 void    change_pwd(t_vars *vars, char *old, char *new);
-void    ft_exit(t_vars *vars);
 void    ft_echo(t_vars *vars);
 int 	parse_flag(t_vars *vars, int i);
-void    ft_export(t_vars *vars);
+
+//export.c
 void    print_export(t_vars *vars);
 int		check_export(t_vars *vars, int i);
 void    add_to_env(t_vars *vars, int env_i, int i);
 void    add_to_export_env(t_vars *vars, int env_i, int i);
 int 	check_if_exist(t_vars *vars, char **arr, int i);
+
+//signals.c
+void	signals(void);
+void	sig_handler(int signum);
 
 #endif

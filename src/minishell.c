@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2023/02/20 09:15:45 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/20 13:29:45 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char **argv, char **envp)
 		vars.status = 0;
 		while (1)
 		{
-			//signal_handling();
+			signals();
 			vars.cmd = NULL;
 			ft_readline(&vars);
 			parse(&vars);
