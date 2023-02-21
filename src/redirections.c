@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 09:56:23 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/21 10:44:09 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/21 12:54:52 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,7 @@ int redirections(t_vars *vars)
         }
         if (ft_strcmp(vars->args[i], ">") == 0)
         {
-            redirs = 1;
-            if (vars->redir_fd[1] != 1)
-                close(vars->redir_fd[1]);
+            fd_redirs(vars, &redirs, 1);
             vars->redir_fd[1] = open(vars->args[i + 1],
                 O_WRONLY | O_CREAT | O_TRUNC, 0644);
         }
@@ -109,6 +107,11 @@ int redirections(t_vars *vars)
             fd_redirs(vars, &redirs, 1);
             vars->redir_fd[1] = open(vars->args[i + 1],
                 O_WRONLY | O_CREAT | O_APPEND, 0644);
+        }
+        else if (ft_strcmp(vars->args[i], "<<") == 0)
+        {
+            fd_redirs(vars, &redirs, 0);
+            vars->redir_fd[0] = ft_heredoc(vars, vars->args[i + 1]);
         }
     }
     duplicate(vars, redirs);

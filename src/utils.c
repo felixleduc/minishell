@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 21:21:43 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/20 09:54:52 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/21 13:03:30 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,30 @@ char    **addback_doublearr(char **arr, char *value)
         new[i] = ft_strdup(arr[i]);
     new[i] = ft_strdup(value);
     return (new);
+}
+
+int ft_heredoc(t_vars *vars, char *stop)
+{
+    int     fds[2];
+    int     pid;
+    char    *line;
+
+    pipe(fds);
+    pid = fork();
+    if (pid == 0)
+    {
+        while (1)
+        {
+            line = readline("heredoc > ");
+            if (ft_strcmp(line, stop) == 0)
+                break ;
+            ft_putendl_fd(line, fds[1]);
+            free(line);
+        }
+        free(line);
+        exit(0);
+    }
+    waitpid(pid, &vars->status, 0);
+    close(fds[1]);
+    return (fds[0]);
 }

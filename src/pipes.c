@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:21:00 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/21 10:52:50 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/21 12:40:42 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,12 @@ void    do_pipes(t_vars *vars)
     {
         sep_pipes(vars);
         if (redirections(vars))
+        {
+            free_doublearr(vars->args);
+            ++i;
+            continue ;
+        }
+        if (!vars->args[0])
         {
             free_doublearr(vars->args);
             ++i;

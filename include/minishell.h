@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:58:41 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/21 10:31:14 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/21 12:54:43 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	rm_quotes(t_vars *vars, char *quotes);
 void    free_doublearr(char **arr);
 char    **dup_doublearr(char **arr);
 char    **addback_doublearr(char **arr, char *value);
+int 	ft_heredoc(t_vars *vars, char *stop);
 
 //pipes.c
 void    do_pipes(t_vars *vars);
@@ -121,9 +122,5 @@ int		check_export(t_vars *vars, int i);
 void    add_to_env(t_vars *vars, int env_i, int i);
 void    add_to_export_env(t_vars *vars, int env_i, int i);
 int 	check_if_exist(t_vars *vars, char **arr, int i);
-
-//signals.c
-void	signals(void);
-void	sig_handler(int signum);
 
 #endif
