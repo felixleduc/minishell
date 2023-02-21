@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:58:41 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/20 13:29:35 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/21 10:31:14 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ void    dup_for_exec(t_vars *vars);
 //redirections.c
 int		redirections(t_vars *vars);
 void    fd_redirs(t_vars *vars, int *redirs, int in_out);
-void    duplicate(t_vars *vars);
+void    duplicate(t_vars *vars, int redirs);
 void    remake_args(t_vars *vars);
-void    remake_args2(t_vars *vars, int i, int red);
+void    remake_args2(t_vars *vars, int i);
 
 //builtins.c
 int 	built_in(t_vars *vars);

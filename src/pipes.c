@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:21:00 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/20 09:14:27 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/21 10:28:53 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,6 @@ void    do_exec(t_vars *vars, int nb)
             close(fd[0]);
             dup2(fd[1], STDOUT_FILENO);
         }
-        if (redirections(vars))
-            exit(1);
         execve(vars->path, vars->args, vars->env);
         perror(vars->args[0]);
         exit(1);
@@ -124,8 +122,6 @@ void    do_exec(t_vars *vars, int nb)
 
 void    do_exec_solo(t_vars *vars)
 {
-    if (redirections(vars))
-        return ;
     vars->pids[0] = fork();
     if (vars->pids[0] == 0)
     {
@@ -147,6 +143,12 @@ void    do_pipes(t_vars *vars)
     while (i <= vars->nb_pipes)
     {
         sep_pipes(vars);
+        if (redirections(vars))
+        {
+            free_doublearr(vars->args);
+            ++i;
+            continue ;
+        }
         if (built_in(vars))
         {
             free_doublearr(vars->args);
