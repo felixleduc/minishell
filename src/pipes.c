@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:21:00 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/21 10:28:53 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/21 10:52:50 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void    find_path(t_vars *vars)
     int     i;
 
     i = -1;
-    if (vars->args[0][0] == '/')
+    if (vars->args[0][0] == '/'
+        || (vars->args[0][0] == '.' && vars->args[0][1] == '/'))
     {
         vars->path = ft_strdup(vars->args[0]);
         return ;
@@ -109,8 +110,10 @@ void    do_exec(t_vars *vars, int nb)
             close(fd[0]);
             dup2(fd[1], STDOUT_FILENO);
         }
+        if (built_in(vars))
+            exit (0);
         execve(vars->path, vars->args, vars->env);
-        perror(vars->args[0]);
+        printf("%s: command not found\n", vars->args[0]);
         exit(1);
     }
     if (nb < vars->nb_pipes)
@@ -122,11 +125,13 @@ void    do_exec(t_vars *vars, int nb)
 
 void    do_exec_solo(t_vars *vars)
 {
+    if (built_in(vars))
+        return ;
     vars->pids[0] = fork();
     if (vars->pids[0] == 0)
     {
         execve(vars->path, vars->args, vars->env);
-        perror(vars->args[0]);
+        printf("%s: command not found\n", vars->args[0]);
         exit(1);
     }
     waitpid(vars->pids[0], &vars->status, 0);
@@ -144,12 +149,6 @@ void    do_pipes(t_vars *vars)
     {
         sep_pipes(vars);
         if (redirections(vars))
-        {
-            free_doublearr(vars->args);
-            ++i;
-            continue ;
-        }
-        if (built_in(vars))
         {
             free_doublearr(vars->args);
             ++i;
