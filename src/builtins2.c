@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 13:04:03 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/20 13:05:38 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/22 13:50:41 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void    ft_cd(t_vars *vars)
     free(new);
     if (ret != 0)
     {
-        vars->status = errno;
+        vars->status = 1;
         printf("cd: %s: No such file or directory\n", vars->args[1]);
     }
 }
@@ -59,6 +59,8 @@ int parse_flag(t_vars *vars, int i)
     int j;
 
     j = 0;
+    if (!vars->args[1])
+        return (0);
     if (vars->args[i])
     {
         if (vars->args[i][0] != '-')
@@ -86,15 +88,15 @@ void    ft_echo(t_vars *vars)
         else
             break ;
     }
-    while (vars->args[i + 1])
+    while (vars->args[i])
     {
-        printf("%s ", vars->args[i]);
+        printf("%s", vars->args[i]);
+        if (vars->args[i + 1])
+            printf(" ");
         ++i;
     }
-    if (n)
-        printf("%s", vars->args[i]);
-    else
-        printf("%s\n", vars->args[i]);
+    if (!n)
+        printf("\n");
 }
 
 void    ft_env(t_vars *vars)

@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 09:56:23 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/21 12:54:52 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/22 14:07:51 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int redirections(t_vars *vars)
             || ft_strcmp(vars->args[i], ">>") == 0 || ft_strcmp(vars->args[i], "<") == 0
             || ft_strcmp(vars->args[i], "<<") == 0))
         {
+            vars->status = 258;
             printf("minishell: parse error near '\\n'\n");
             return (1);
         }
@@ -98,6 +99,7 @@ int redirections(t_vars *vars)
                 O_RDONLY);
             if (vars->redir_fd[0] == -1)
             {
+                vars->status = 1;
                 printf("%s: No such file or directory\n", vars->args[i + 1]);
                 return (1);
             }

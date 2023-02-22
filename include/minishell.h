@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:58:41 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/21 12:54:43 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/22 12:38:39 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ void    free_doublearr(char **arr);
 char    **dup_doublearr(char **arr);
 char    **addback_doublearr(char **arr, char *value);
 int 	ft_heredoc(t_vars *vars, char *stop);
+
+//utils2.c
+void    status_var(t_vars *vars, int index);
 
 //pipes.c
 void    do_pipes(t_vars *vars);

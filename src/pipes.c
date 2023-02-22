@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:21:00 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/21 12:40:42 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/22 14:25:09 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int    get_pipes(t_vars *vars)
             || (vars->piped[i + 1] && ft_strcmp(vars->piped[i], "|") == 0 && ft_strcmp(vars->piped[i + 1], "|") == 0)
             ||  (!vars->piped[i + 1] && ft_strcmp(vars->piped[i], "|") == 0))
         {
+            vars->status = 258;
             printf("minishell: syntax error near unexpected token '|'\n");
             return (1);
         }
@@ -114,7 +115,7 @@ void    do_exec(t_vars *vars, int nb)
             exit (0);
         execve(vars->path, vars->args, vars->env);
         printf("%s: command not found\n", vars->args[0]);
-        exit(1);
+        exit(2);
     }
     if (nb < vars->nb_pipes)
     {
@@ -132,9 +133,13 @@ void    do_exec_solo(t_vars *vars)
     {
         execve(vars->path, vars->args, vars->env);
         printf("%s: command not found\n", vars->args[0]);
-        exit(1);
+        exit(2);
     }
     waitpid(vars->pids[0], &vars->status, 0);
+    if (vars->status == 256)
+        vars->status -= 255;
+    else if (vars->status != 0)
+        vars->status = 127;
 }
 
 void    do_pipes(t_vars *vars)
@@ -173,6 +178,10 @@ void    do_pipes(t_vars *vars)
     i = -1;
     while (++i <= vars->nb_pipes)
         waitpid(vars->pids[i], &vars->status, 0);
+    if (vars->status == 256)
+        vars->status -= 255;
+    else if (vars->status != 0)
+        vars->status = 127;
 }
 
 void    dup_for_exec(t_vars *vars)

@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2023/02/21 12:26:49 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/22 13:37:15 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	free_garbage(t_vars *vars)
 		free_doublearr(vars->piped);
 	if (vars->pids)
 		free(vars->pids);
-	free_doublearr(vars->env);
-	free_doublearr(vars->export_env);
 	free(vars->cmd);
 }
 
@@ -46,11 +44,12 @@ int	main(int argc, char **argv, char **envp)
 		while (1)
 		{
 			//signals();
-			//vars.cmd = NULL;
 			ft_readline(&vars);
 			parse(&vars);
 			free_garbage(&vars);
 		}
+		free_doublearr(vars.env);
+		free_doublearr(vars.export_env);
 	}
 	else
 		printf("Usage : ./minishell\n");

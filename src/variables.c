@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:31:42 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/15 14:45:05 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/22 14:00:58 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void    get_var(t_vars *vars, int index)
         && (vars->piped[vars->parse.nb_arg][index + 1] >= '0'
         && vars->piped[vars->parse.nb_arg][index + 1] <= '9'))
     {
-        delete_var(vars, start, index);
+        delete_var(vars, start, index + 1);
         return ;
     }
     while (vars->piped[vars->parse.nb_arg][index + 1]
@@ -115,7 +115,7 @@ void    variables(t_vars *vars)
             else if (vars->piped[vars->parse.nb_arg][j + 1] && vars->piped[vars->parse.nb_arg][j] == '$'
                 && vars->piped[vars->parse.nb_arg][j + 1] == '?')
             {
-                get_var(vars, j);
+                status_var(vars, j);
                 j = -1;
             }
             else if (vars->piped[vars->parse.nb_arg][j] == '$')

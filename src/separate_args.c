@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 09:35:48 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/15 11:40:34 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/22 14:04:19 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void    quotes(t_vars *vars, int *i, char quote)
             return ;
         }
     }
+    vars->status = 1;
     printf("unclosed quotes\n");
 }
 

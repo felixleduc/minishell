@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 10:50:10 by fleduc            #+#    #+#             */
-/*   Updated: 2023/02/21 10:05:12 by fleduc           ###   ########.fr       */
+/*   Updated: 2023/02/22 13:53:29 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,10 @@ void    ft_export(t_vars *vars)
             add_to_export_env(vars, check_if_exist(vars, vars->export_env, i), i);
         }
         else
+        {
+            vars->status = 1;
             printf("export: %s: not a valid identifier\n", vars->args[i]);
+        }
     }
     if (!vars->args[1])
         print_export(vars);
